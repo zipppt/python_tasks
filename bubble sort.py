@@ -9,6 +9,7 @@ while i < len(l) - 1:
             temp = l[j]
             l[j] = l[j + 1]
             l[j + 1] = temp
+            print(l)
         j = j + 1
     i = i + 1
 
