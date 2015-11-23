@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- coding: cp866 -*-
+
 
 #Укажем что это за фича
 Feature: Checking search
@@ -7,5 +7,6 @@ Feature: Checking search
 Scenario: Сheck some text in search results
 #И используем наши шаги.
   Given website "ya.ru"
-  When push button with text 'Найти'
+  Then push button with text 'Найти'
   Then page include text 'Задан пустой поисковый запрос'
+

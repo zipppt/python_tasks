@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- coding: cp866 -*-
 
 from behave import *
 from selenium.webdriver.common.by import By
@@ -8,23 +7,23 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 from selenium import webdriver
 
-#–û—Ç–∫—Ä–æ–µ–º –≥–ª–∞–≤–Ω—É—é —Å—Ç—Ä–∞–Ω–∏—Ü—É. –ü–µ—Ä–µ–¥–∞–¥–∏–º –≤ –∫–∞—á–µ—Å—Ç–≤–µ –∞—Ä–≥—É–º–µ–Ω—Ç–∞ –∞–¥—Ä–µ—Å —Å—Ç—Ä–∞–Ω–∏—Ü—ã.
+#é‚™‡Æ•¨ £´†¢≠„Ó ·‚‡†≠®Ê„. è•‡•§†§®¨ ¢ ™†Á•·‚¢• †‡£„¨•≠‚† †§‡•· ·‚‡†≠®ÊÎ.
 @given('website "{url}"')
 def step(context, url):
-#–ò–∑–º–µ–Ω–∏—Ç–µ —Å—Ç—Ä–æ–∫—É, –¥–ª—è –≤—ã–ø–æ–ª–Ω–µ–Ω–∏—è —Ç–µ—Å—Ç–∞ –≤ –¥—Ä—É–≥–æ–º –±—Ä–∞—É–∑–µ—Ä–µ
+#àß¨•≠®‚• ·‚‡Æ™„, §´Ô ¢ÎØÆ´≠•≠®Ô ‚•·‚† ¢ §‡„£Æ¨ °‡†„ß•‡•
     context.browser = webdriver.Firefox()
     context.browser.maximize_window()
     context.browser.get("http://ya.ru")
 
-#–¢–µ–ø–µ—Ä—å –Ω–∞–∂–º–µ–º –Ω–∞ –∫–Ω–æ–ø–∫—É "–ù–∞–π—Ç–∏"
-@When("push button with text '{text}'")
+#í•Ø•‡Ï ≠†¶¨•¨ ≠† ™≠ÆØ™„ "ç†©‚®"
+@Then("push button with text '{text}'")
 def step(context, text):
     WebDriverWait(context.browser, 120).until(
         EC.element_to_be_clickable((By.XPATH, '//button'))
     )
     context.browser.find_element_by_xpath('//button').click()
 
-#–ü—Ä–æ–≤–µ—Ä–∏–º, —á—Ç–æ –º—ã –Ω–∞ —Å—Ç—Ä–∞–Ω–∏—Ü–µ —Å —Ä–µ–∑—É–ª—å—Ç–∞—Ç–∞–º–∏ –ø–æ–∏—Å–∫–∞, –µ—Å—Ç—å –Ω–µ–∫–æ—Ç–æ—Ä—ã–π –∏—Å–∫–æ–º—ã–π —Ç–µ–∫—Å—Ç
+#è‡Æ¢•‡®¨, Á‚Æ ¨Î ≠† ·‚‡†≠®Ê• · ‡•ß„´Ï‚†‚†¨® ØÆ®·™†, •·‚Ï ≠•™Æ‚Æ‡Î© ®·™Æ¨Î© ‚•™·‚
 @Then("page include text '{text}'")
 def step(context, text):
     WebDriverWait(context.browser, 120).until(
@@ -33,34 +32,3 @@ def step(context, text):
     assert context.browser.find_element_by_xpath('//*[contains(text(), "%s")]' % text)
     context.browser.quit()
 
-
-@given('website "ya\.ru"')
-def step_impl(context):
-    """
-    :type context behave.runner.Context
-    """
-    pass
-
-
-@then("push button with text '–ù–∞–π—Ç–∏'")
-def step_impl(context):
-    """
-    :type context behave.runner.Context
-    """
-    pass
-
-
-@then("page include text '–ó–∞–¥–∞–Ω –ø—É—Å—Ç–æ–π –ø–æ–∏—Å–∫–æ–≤—ã–π –∑–∞–ø—Ä–æ—Å'")
-def step_impl(context):
-    """
-    :type context behave.runner.Context
-    """
-    pass
-
-
-@when("push button with text '–ù–∞–π—Ç–∏'")
-def step_impl(context):
-    """
-    :type context behave.runner.Context
-    """
-    pass
