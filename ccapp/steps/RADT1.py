@@ -14,14 +14,14 @@ LOGIN_LINK_LOCATOR = '//div[@id="tools-nav"]/ul[1]/li[1]/a'
 
 
 @given('website "{url}"')
-def step(context, url):
+def step_impl(context, url):
     context.browser = webdriver.Firefox()
     #  context.browser.maximize_window()
     context.browser.get(url)
 
 
 @when('enter login "{login}" and password "{password}"')
-def step(context, login, password):
+def step_impl(context, login, password):
     WebDriverWait(context.browser, 120).until(EC.element_to_be_clickable((By.XPATH, LOGIN_LINK_LOCATOR)))
     context.browser.find_element_by_xpath(LOGIN_LINK_LOCATOR).click()
     username_field = context.browser.find_element_by_id('id_username')
@@ -32,13 +32,14 @@ def step(context, login, password):
     log.click()
 
 
-@then("is logged on")
-def step(context):
-    pass
+@then('is logged in as "{username}"')
+def step_impl(context, username):
+    element = context.browser.find_element_by_xpath("//div[@id='tools-nav']/ul[1]/li[1]/a/strong")
+    assert element.text == username
 
 
 @then("enter PersonaInformation form Radt1")
-def step(context):
+def step_impl(context):
     WebDriverWait(context.browser, 120).until(EC.presence_of_element_located((By.XPATH, '//div[@class="row menu"]/div[@class="col-sm-3"][2]/ul[3]/li[2]/a')))
     context.browser.find_element_by_xpath('//div[@class="row menu"]/div[@class="col-sm-3"][2]/ul[3]/li[2]/a').click()
     element = context.browser.find_element_by_xpath("//div[@class='wrapit']/h4[1]/a")
@@ -87,7 +88,7 @@ def step(context):
 
 
 @then("doSubmit")
-def step(context):
+def step_impl(context):
     element = context.browser.find_element_by_xpath("//input[@id='id_agree']")
     element.click()
     element = context.browser.find_element_by_xpath("//a[@id='submit_button']/span")
@@ -99,7 +100,7 @@ def step(context):
 
 
 @then("doRegHis")
-def step(context):
+def step_impl(context):
     element = context.browser.find_element_by_xpath("//div[@id='div_id_registered']/input")
     element.click()
     element = context.browser.find_element_by_id('id_initial_date_month')
@@ -120,7 +121,7 @@ def step(context):
 
 
 @then("doApply")
-def step(context):
+def step_impl(context):
     element = context.browser.find_element_by_xpath("//a[@id='submit_button']/span")
     element.click()
     element = context.browser.find_element_by_xpath("//input[@id='id_type_0']")
@@ -130,7 +131,7 @@ def step(context):
 
 
 @then("doClean")
-def step(context):
+def step_impl(context):
     context.browser.get("http://ccapp-test.marpasoft.com/admin/profiles/profile/148208/")
     element = context.browser.find_element_by_xpath("//input[@id='id_application_set-0-DELETE']")
     element.click()
