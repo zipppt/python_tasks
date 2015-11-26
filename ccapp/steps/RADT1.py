@@ -1,39 +1,43 @@
 # -*- coding: cp866 -*-
 
 from behave import *
-import unittest
+#  import unittest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
+#  import time
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.common.keys import Keys
+#  from selenium.webdriver.common.keys import Keys
 
-#Откроем главную страницу. Передадим в качестве аргумента адрес страницы.
+LOGIN_LINK_LOCATOR = '//div[@id="tools-nav"]/ul[1]/li[1]/a'
+
+
 @given('website "{url}"')
 def step(context, url):
-#Измените строку, для выполнения теста в другом браузере
     context.browser = webdriver.Firefox()
-    #context.browser.maximize_window()
-    context.browser.get("http://ccapp-test.marpasoft.com/")
+    #  context.browser.maximize_window()
+    context.browser.get(url)
 
-#Теперь нажмем на кнопку "Найти"
-@Then("enter login and the password")
-def step(context):
-    WebDriverWait(context.browser, 120).until(EC.element_to_be_clickable((By.XPATH, '//div[@id="tools-nav"]/ul[1]/li[1]/a')))
-    context.browser.find_element_by_xpath('//div[@id="tools-nav"]/ul[1]/li[1]/a').click()
-    WebDriverWait(context.browser, 120).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="id_username"]')))
-    context.browser.find_element_by_xpath('//input[@id="id_username"]').click()
-    username = context.browser.find_element_by_id('id_username')
-    username.send_keys("zipppt@gmail.com")
-    password = context.browser.find_element_by_id('id_password')
-    password.send_keys("zipppt2016")
+
+@when('enter login "{login}" and password "{password}"')
+def step(context, login, password):
+    WebDriverWait(context.browser, 120).until(EC.element_to_be_clickable((By.XPATH, LOGIN_LINK_LOCATOR)))
+    context.browser.find_element_by_xpath(LOGIN_LINK_LOCATOR).click()
+    username_field = context.browser.find_element_by_id('id_username')
+    username_field.send_keys(login)
+    password_field = context.browser.find_element_by_id('id_password')
+    password_field.send_keys(password)
     log = context.browser.find_element_by_id('submit_button')
     log.click()
 
-#Проверим, что мы на странице с результатами поиска, есть некоторый искомый текст
-@Then("enter PersonaInformation form Radt1")
+
+@then("is logged on")
+def step(context):
+    pass
+
+
+@then("enter PersonaInformation form Radt1")
 def step(context):
     WebDriverWait(context.browser, 120).until(EC.presence_of_element_located((By.XPATH, '//div[@class="row menu"]/div[@class="col-sm-3"][2]/ul[3]/li[2]/a')))
     context.browser.find_element_by_xpath('//div[@class="row menu"]/div[@class="col-sm-3"][2]/ul[3]/li[2]/a').click()
@@ -80,7 +84,9 @@ def step(context):
     element.send_keys("zipppt@gmail.com")
     element = context.browser.find_element_by_xpath("//div[@class='form_block']/a[1]/span")
     element.click()
-@Then("doSubmit")
+
+
+@then("doSubmit")
 def step(context):
     element = context.browser.find_element_by_xpath("//input[@id='id_agree']")
     element.click()
@@ -90,7 +96,9 @@ def step(context):
     element.click()
     element = context.browser.find_element_by_xpath("//a[@id='submit_button']/span")
     element.click()
-@Then("doRegHis")
+
+
+@then("doRegHis")
 def step(context):
     element = context.browser.find_element_by_xpath("//div[@id='div_id_registered']/input")
     element.click()
@@ -109,7 +117,9 @@ def step(context):
     element.click()
     element = context.browser.find_element_by_xpath("//input[@id='id_have_ever_revoked_0']")
     element.click()
-@Then("doApply")
+
+
+@then("doApply")
 def step(context):
     element = context.browser.find_element_by_xpath("//a[@id='submit_button']/span")
     element.click()
@@ -117,7 +127,9 @@ def step(context):
     element.click()
     element = context.browser.find_element_by_xpath("//a[@id='submit_button']/span")
     element.click()
-@Then("doClean")
+
+
+@then("doClean")
 def step(context):
     context.browser.get("http://ccapp-test.marpasoft.com/admin/profiles/profile/148208/")
     element = context.browser.find_element_by_xpath("//input[@id='id_application_set-0-DELETE']")
