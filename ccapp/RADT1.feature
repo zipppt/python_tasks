@@ -7,10 +7,9 @@ Feature: RADT-I
     When enter login "zipppt@gmail.com" and password "zipppt2016"
     Then is logged in as "zipppt"
     When enter RADT-I
-    Then enter PersonaInformation form Radt1
-    Then doSubmit
-    Then doRegHis
-    Then doApply
-    Then doClean
-
-
+    Then is RADT-I in as "Requirements for applying for Registered Alcohol and Drug Trainee I:"
+    When enter PersonaInformation form Radt1
+    When Submit
+    When RegHis
+    When Apply
+    Then Clean

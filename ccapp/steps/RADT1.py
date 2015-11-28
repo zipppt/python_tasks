@@ -37,11 +37,19 @@ def step_impl(context, username):
     element = context.browser.find_element_by_xpath("//div[@id='tools-nav']/ul[1]/li[1]/a/strong")
     assert element.text == username
 
-
-@then("enter PersonaInformation form Radt1")
+@when("enter RADT-I")
 def step_impl(context):
     WebDriverWait(context.browser, 120).until(EC.presence_of_element_located((By.XPATH, '//div[@class="row menu"]/div[@class="col-sm-3"][2]/ul[3]/li[2]/a')))
     context.browser.find_element_by_xpath('//div[@class="row menu"]/div[@class="col-sm-3"][2]/ul[3]/li[2]/a').click()
+
+@then('is RADT-I in as "{name}"')
+def step_impl(context, name):
+    element = context.browser.find_element_by_xpath("//div[@class='flatblock-content']/h2[2]")
+    assert element.text == name
+
+@when("enter PersonaInformation form Radt1")
+def step_impl(context):
+
     element = context.browser.find_element_by_xpath("//div[@class='wrapit']/h4[1]/a")
     element.click()
     element = context.browser.find_element_by_xpath("//div[@id='div_id_personal_info-first_name']/input")
@@ -87,7 +95,7 @@ def step_impl(context):
     element.click()
 
 
-@then("doSubmit")
+@when("Submit")
 def step_impl(context):
     element = context.browser.find_element_by_xpath("//input[@id='id_agree']")
     element.click()
@@ -99,7 +107,7 @@ def step_impl(context):
     element.click()
 
 
-@then("doRegHis")
+@when("RegHis")
 def step_impl(context):
     element = context.browser.find_element_by_xpath("//div[@id='div_id_registered']/input")
     element.click()
@@ -120,7 +128,7 @@ def step_impl(context):
     element.click()
 
 
-@then("doApply")
+@when("Apply")
 def step_impl(context):
     element = context.browser.find_element_by_xpath("//a[@id='submit_button']/span")
     element.click()
@@ -130,10 +138,11 @@ def step_impl(context):
     element.click()
 
 
-@then("doClean")
+@then("Clean")
 def step_impl(context):
     context.browser.get("http://ccapp-test.marpasoft.com/admin/profiles/profile/148208/")
     element = context.browser.find_element_by_xpath("//input[@id='id_application_set-0-DELETE']")
     element.click()
     element = context.browser.find_element_by_xpath("//input[@class='default']")
     element.click()
+
