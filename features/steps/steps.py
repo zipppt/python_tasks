@@ -12,7 +12,7 @@ from selenium import webdriver
 def step(context, url):
 #Измените строку, для выполнения теста в другом браузере
     context.browser = webdriver.Firefox()
-    context.browser.maximize_window()
+    #context.browser.maximize_window()
     context.browser.get("http://ya.ru")
 
 #Теперь нажмем на кнопку "Найти"
