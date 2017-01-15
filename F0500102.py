@@ -1,52 +1,62 @@
+# -*- coding: utf-8 -*-
+
 from openerp import models, fields
 
 
 class AModel1(models.Model):
 
     _name = 'a.model1.name'
+# там где цифры интеджер - сайзов нет, а там где буквы Чар+ сайз, булен там где галочки
+    htin = fields.Char(help="######", required=True, size=15) ###
+    hpages = fields.Integer(string="Стор.")
+    hj = fields.Boolean(string="юридична особа", required=True)
+    hf = fields.Boolean(string="фізична особа####", required=True)
+    hz = fields.Boolean(string="звітний", required=True)
+    hzn = fields.Boolean(string="новий звітний", required=True)
+    hzu = fields.Boolean(string="уточнюючий", required=True)
+    hname = fields.Char(help="назва юр особи", required=True, size=200)
+    ###
+    htinsti = fields.Char(string="ідентифікаційний код", required=True, size=8)
+    hsti = fields.Char(string="назва органу податкової служби", required=True, size=99)
+    hzp = fields.Char(string="звітний період", required=True)
+    hzy = fields.Integer(string="звітний рік", required=True)
+    r00g01i = fields.Integer(string="працювало у штаті")
+    r00g02i = fields.Integer(string="працювало за сумісництвом")
+    r00g03i = fields.Integer(string="заповнюється в органі", help="№№№№№№№№")
 
-    htin = fields.Char(string="ЭДРПОУ", required=True, max_length=18)
-    hpages = fields.Char(string="Стор.", required=True, max_length=5)
-    hj = fields.Char(string="юридична особа", required=True, max_length=99)
-    hf = fields.Char(string="фізична особа", required=True, max_length=99)
-    hz = fields.Char(string="звітний", required=True, max_length=15)
-    hzn = fields.Char(string="новий звітний", required=True, max_length=15)
-    hzu = fields.Char(string="уточнюючий", required=True, max_length=15)
-    hname = fields.Char(string="назва юр особи", required=True, max_length=99)
-    htinsti = fields.Char(int="ідентифікаційний код", required=True, max_length=8)
-    hsti = fields.Char(string="назва органу податкової служби", required=True, max_length=99)
-    hzp = fields.Char(string="звітний період", required=True, max_length=10)
-    hzy = fields.Char(int="звітний рік", required=True, max_length=4)
-    r00g01i = fields.Char(int="працювало у штаті", required=True, max_length=9)
-    r00g02i = fields.Char(int="працювало за сумісництвом", required=True, max_length=9)
-    r00g03i = fields.Char(int="заповнюється в органі", required=True, max_length=9)
-    r02g01i = fields.Char(int="кількість рядків", required=True, max_length=9)
-    r02g02i = fields.Char(int="кількість фізичних осіб", required=True, max_length=9)
-    r02g03i = fields.Char(int="кількість аркушів", required=True, max_length=9)
-    hkbos = fields.Char(int="керівник підприємства ідентифікаційний номер", required=True, max_length=8)
-    hbos = fields.Char(string="керівник підприємства прізвище", required=True, max_length=20)
-    htelbos = fields.Char(int="керівник підприємства тел", required=True, max_length=12)
-    hkbuh = fields.Char(int="головний бухгалтер ідентифікаційний номер", required=True, max_length=8)
-    hbuh = fields.Char(string="головний бухгалтер прізвище", required=True, max_length=20)
-    htelbuh = fields.Char(int="головний бухгалтер тел", required=True, max_length=12)
-    hfill = fields.Char(int="дата подання", required=True, max_length=8)
-    hfo = fields.Char(string="фізична особа прізвище", required=True, max_length=20)
-    htelfo = fields.Char(int="фізична особа тел", required=True, max_length=12)
+    r01g03a = fields.Float(string="Сума нарахованого доходу, всього", help="грн.,коп.", digits=(10, 2))
+    r01g03 = fields.Float(string="#####################", help="грн.,коп.", digits=(10, 2))
+    r01g04a = fields.Float(string="####################, всього", help="грн.,коп.", digits=(10, 2))
+    r01g04 = fields.Float(string="#########################, всього", help="грн.,коп.", digits=(10, 2))
 
+    r02g01i = fields.Integer(string="кількість рядків")
+    r02g02i = fields.Integer(string="кількість фізичних осіб")
+    r02g03i = fields.Integer(string="кількість аркушів")
+    hkbos = fields.Integer(string="керівник підприємства", help="ідентифікаційний номер")
+    hbos = fields.Char(help="прізвище", size=50)
+    htelbos = fields.Char(help="тел", size=20)
+    hkbuh = fields.Integer(string="головний бухгалтер", help="ідентифікаційний номер")
+    hbuh = fields.Char(help="прізвище", size=50)
+    htelbuh = fields.Char(help="тел", size=20)
 
+    hfo = fields.Char(string="фізична особа прізвище", help="прізвище", size=50, required=True)
+    htelfo = fields.Char(help="тел", size=20)
+    hfill = fields.Date(string="дата подання", help="дд.мм.рррр", required=True)
 
 class AModel2(models.Model):
 
     _name = 'a.model2.name'
 
-    rxxxxg02 = fields.Char(int="ідентифікаційний номер", required=True, max_length=8)
-    rxxxxg03a = fields.Float(float="сума нарахованого доходу", required=True, max_length=8)
-    rxxxxg03 = fields.Float(float="сума виплаченого доходу", required=True, max_length=8)
-    rxxxxg04a = fields.Float(float="сума утриманого податку, нарахованого", required=True, max_length=8)
-    rxxxxg04 = fields.Float(float="сума утриманого податку, перерахованого", required=True, max_length=8)
-    rxxxxg05 = fields.Float(float="ознака доходу", required=True, max_length=8)
-    rxxxxg06d = fields.Float(float="дата прийняття на роботу", required=True, max_length=8)
-    rxxxxg07d = fields.Float(float="дата звільнення з роботи", required=True, max_length=8)
-    rxxxxg08 = fields.Float(float="ознака подат.соц.пільги", required=True, max_length=8)
-    rxxxxg09 = fields.Float(float="ознака (0,1)", required=True, max_length=8)
+    amodel1_id = fields.Many2one('a.model1.name')
+
+    rxxxxg02 = fields.Integer(string="ідентифікаційний номер")
+    rxxxxg03a = fields.Float(string="сума нарахованого доходу", help="грн.,коп.", digits=(10, 2))
+    rxxxxg03 = fields.Float(string="сума виплаченого доходу", help="грн.,коп.", digits=(10, 2))
+    rxxxxg04a = fields.Float(string="сума утриманого податку, нарахованого", help="грн.,коп.", digits=(10, 2))
+    rxxxxg04 = fields.Float(string="сума утриманого податку, перерахованого", help="грн.,коп.", digits=(10, 2))
+    rxxxxg05 = fields.Char(string="ознака доходу", size=100)
+    rxxxxg06d = fields.Date(string="дата прийняття на роботу", help="дд.мм.рррр")
+    rxxxxg07d = fields.Date(string="дата звільнення з роботи", help="дд.мм.рррр")
+    rxxxxg08 = fields.Char(string="ознака подат.соц.пільги", size=100)
+    rxxxxg09 = fields.Integer(string="ознака", help="(0,1)")
 
